@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1316BDA927BB99C90095DD4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316BDA827BB99C90095DD4E /* AppDelegate.swift */; };
 		1316BDAB27BB99C90095DD4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316BDAA27BB99C90095DD4E /* SceneDelegate.swift */; };
-		1316BDAD27BB99C90095DD4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316BDAC27BB99C90095DD4E /* ViewController.swift */; };
 		1316BDB327BB99C90095DD4E /* CalendarTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1316BDB127BB99C90095DD4E /* CalendarTask.xcdatamodeld */; };
 		1316BDB527BB99CA0095DD4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1316BDB427BB99CA0095DD4E /* Assets.xcassets */; };
 		1316BDB827BB99CA0095DD4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1316BDB627BB99CA0095DD4E /* LaunchScreen.storyboard */; };
@@ -26,7 +25,6 @@
 		1316BDA527BB99C90095DD4E /* CalendarTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1316BDA827BB99C90095DD4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1316BDAA27BB99C90095DD4E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1316BDAC27BB99C90095DD4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1316BDB227BB99C90095DD4E /* CalendarTask.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalendarTask.xcdatamodel; sourceTree = "<group>"; };
 		1316BDB427BB99CA0095DD4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1316BDB727BB99CA0095DD4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 				1316BDC227BBA7C00095DD4E /* Extensions.swift */,
 				1316BDA827BB99C90095DD4E /* AppDelegate.swift */,
 				1316BDAA27BB99C90095DD4E /* SceneDelegate.swift */,
-				1316BDAC27BB99C90095DD4E /* ViewController.swift */,
 				1316BDBF27BB9F920095DD4E /* Calendar */,
 				1316BDB427BB99CA0095DD4E /* Assets.xcassets */,
 				1316BDB627BB99CA0095DD4E /* LaunchScreen.storyboard */,
@@ -176,7 +173,6 @@
 			files = (
 				1316BDCE27BCC6210095DD4E /* CalendarCollectionViewCell.swift in Sources */,
 				1316BDCC27BC882A0095DD4E /* CalendarViewController.swift in Sources */,
-				1316BDAD27BB99C90095DD4E /* ViewController.swift in Sources */,
 				139B2A0E27BDDB7000E58F77 /* ScheduleViewController.swift in Sources */,
 				1316BDC327BBA7C00095DD4E /* Extensions.swift in Sources */,
 				1316BDC627BBD6550095DD4E /* MonthMetaData.swift in Sources */,
