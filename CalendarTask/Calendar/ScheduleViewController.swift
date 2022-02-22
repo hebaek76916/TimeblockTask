@@ -7,9 +7,27 @@
 
 import UIKit
 
-class ScheduleViewController: UIViewController {
+final class ScheduleViewController: UIViewController {
     
-    let didTapConfirmButtonCompletionHandler: ((String) -> Void)
+   private enum Text {
+        static let dateLabel: String = "Date"
+    }
+    
+    private enum Metric {
+        enum DateLabel {
+            static let cornerRadius: CGFloat = 16.0
+        }
+        
+        enum Textfield {
+            static let cornerRadius: CGFloat = 12.0
+        }
+    }
+    
+    // MARK: - Properties
+    
+    public let didTapConfirmButtonCompletionHandler: ((String) -> Void)
+    
+    // MARK: - UI Properties
     
     private lazy var dimmedBackgroundView: UIView = {
         let view = UIView()
@@ -22,7 +40,7 @@ class ScheduleViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = Metric.DateLabel.cornerRadius
         return view
     }()
     
@@ -57,11 +75,9 @@ class ScheduleViewController: UIViewController {
         return button
     }()
     
-    private lazy var dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateStyle = .full
-        //dateFormatter.dateFormat = "EEEE, dd, MM, YYYY"
         return dateFormatter
     }()
     
@@ -79,34 +95,24 @@ class ScheduleViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("\(self) deinitailzed")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .clear
-        setUpUI()
-        let tap = UITapGestureRecognizer(target: self,
-                                         action: #selector(dismissView))
-        dimmedBackgroundView.addGestureRecognizer(tap)
-        confirmButton.addTarget(self,
-                                action: #selector(confirmSchedule),
-                                for: .touchUpInside)
-    }
-    
-    @objc func dismissView() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func confirmSchedule() {
-        guard textField.text != "" else {
-            dismiss(animated: true, completion: nil)
-            return
-        }
-        didTapConfirmButtonCompletionHandler(textField.text ?? "")
-        dismiss(animated: true, completion: nil)
         
+        setUpUI()
+        configureButtonSelectors()
     }
-    
+}
+
+// MARK: - Setup UI
+extension ScheduleViewController {
     private func setUpUI() {
+        view.backgroundColor = .clear
+        
         view.addSubview(dimmedBackgroundView)
         view.addSubview(boxView)
         boxView.addSubviews(dateLabel, textField, confirmButton)
@@ -120,8 +126,10 @@ class ScheduleViewController: UIViewController {
         [
             boxView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             boxView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            boxView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            boxView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            boxView.widthAnchor.constraint(equalTo: view.widthAnchor,
+                                           multiplier: 0.7),
+            boxView.heightAnchor.constraint(equalTo: view.heightAnchor,
+                                            multiplier: 0.5),
         ].forEach { $0.isActive = true }
         
         [
@@ -146,5 +154,35 @@ class ScheduleViewController: UIViewController {
                                                   constant: -10)
         ].forEach{ $0.isActive = true }
     }
+}
+
+// MARK: - Selectors
+private extension ScheduleViewController {
     
+    private func configureButtonSelectors() {
+        let dimmedBackgroundViewTap = UITapGestureRecognizer(target: self,
+                                         action: #selector(didTapDimmedBackgroundView))
+        dimmedBackgroundView.addGestureRecognizer(dimmedBackgroundViewTap)
+        confirmButton.addTarget(self,
+                                action: #selector(confirmSchedule),
+                                for: .touchUpInside)
+        
+    }
+    
+    @objc private func didTapDimmedBackgroundView(_ sender: UITapGestureRecognizer) {
+        dismiss(animated: true,
+                completion: nil)
+    }
+    
+    @objc func confirmSchedule() {
+        guard textField.text != "" else {
+            dismiss(animated: true,
+                    completion: nil)
+            return
+        }
+        didTapConfirmButtonCompletionHandler(textField.text ?? "")
+        dismiss(animated: true,// [] completion에 넣기
+                completion: nil)
+        
+    }
 }
