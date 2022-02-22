@@ -18,6 +18,8 @@
 		1316BDCA27BBE9710095DD4E /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316BDC927BBE9710095DD4E /* Day.swift */; };
 		1316BDCC27BC882A0095DD4E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316BDCB27BC882A0095DD4E /* CalendarViewController.swift */; };
 		1316BDCE27BCC6210095DD4E /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316BDCD27BCC6210095DD4E /* CalendarCollectionViewCell.swift */; };
+		1397D9FA27C44F9C00A97B6A /* CalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397D9F927C44F9C00A97B6A /* CalendarCellView.swift */; };
+		1397D9FC27C4767D00A97B6A /* CalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397D9FB27C4767D00A97B6A /* CalendarExtension.swift */; };
 		139B2A0E27BDDB7000E58F77 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139B2A0D27BDDB7000E58F77 /* ScheduleViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		1316BDC927BBE9710095DD4E /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		1316BDCB27BC882A0095DD4E /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		1316BDCD27BCC6210095DD4E /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		1397D9F927C44F9C00A97B6A /* CalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCellView.swift; sourceTree = "<group>"; };
+		1397D9FB27C4767D00A97B6A /* CalendarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtension.swift; sourceTree = "<group>"; };
 		139B2A0D27BDDB7000E58F77 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +91,9 @@
 				1316BDC027BB9FC30095DD4E /* CalendarHeaderView.swift */,
 				1316BDCB27BC882A0095DD4E /* CalendarViewController.swift */,
 				1316BDCD27BCC6210095DD4E /* CalendarCollectionViewCell.swift */,
+				1397D9F927C44F9C00A97B6A /* CalendarCellView.swift */,
 				139B2A0D27BDDB7000E58F77 /* ScheduleViewController.swift */,
+				1397D9FB27C4767D00A97B6A /* CalendarExtension.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -176,7 +182,9 @@
 				139B2A0E27BDDB7000E58F77 /* ScheduleViewController.swift in Sources */,
 				1316BDC327BBA7C00095DD4E /* Extensions.swift in Sources */,
 				1316BDC627BBD6550095DD4E /* MonthMetaData.swift in Sources */,
+				1397D9FC27C4767D00A97B6A /* CalendarExtension.swift in Sources */,
 				1316BDA927BB99C90095DD4E /* AppDelegate.swift in Sources */,
+				1397D9FA27C44F9C00A97B6A /* CalendarCellView.swift in Sources */,
 				1316BDB327BB99C90095DD4E /* CalendarTask.xcdatamodeld in Sources */,
 				1316BDCA27BBE9710095DD4E /* Day.swift in Sources */,
 				1316BDC127BB9FC30095DD4E /* CalendarHeaderView.swift in Sources */,
