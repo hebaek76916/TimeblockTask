@@ -9,9 +9,39 @@ import UIKit
 
 class CalendarHeaderView: UIView {
     
+    //MARK: - Properties
     let didTapLastMonthCompletionHandler: (() -> Void)
     let didTapNextMonthCompletionHandler: (() -> Void)
     
+    var baseDate = Date() {
+        didSet {
+            monthLabel.text = dateFormatter.string(from: baseDate)
+        }
+    }
+    
+    enum DayOfTheWeek: CaseIterable {
+        case Sun
+        case Mon
+        case Tue
+        case Wed
+        case Thu
+        case Fri
+        case Sat
+        
+        var rawvalue: (title: String, color: UIColor) {
+            switch self {
+            case .Sun: return (title: "Sun", color: .red)
+            case .Tue: return (title: "Mon", color: .black)
+            case .Mon: return (title: "Tue", color: .black)
+            case .Wed: return (title: "Wed", color: .black)
+            case .Thu: return (title: "Thu", color: .black)
+            case .Fri: return (title: "Fri", color: .black)
+            case .Sat: return (title: "Sat", color: .blue)
+            }
+        }
+    }
+
+    //MARK: - View Properties
     lazy var monthLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -57,19 +87,7 @@ class CalendarHeaderView: UIView {
         return button
     }()
     
-    @objc func didTapPreviousMonthButton() {
-        didTapLastMonthCompletionHandler()
-    }
     
-    @objc func didTapNextMonthButton() {
-        didTapNextMonthCompletionHandler()
-    }
-    
-    var baseDate = Date() {
-        didSet {
-            monthLabel.text = dateFormatter.string(from: baseDate)
-        }
-    }
     
     init(
         didTapLastMonthCompletionHandler: @escaping (() -> Void),
@@ -78,70 +96,16 @@ class CalendarHeaderView: UIView {
         self.didTapLastMonthCompletionHandler = didTapLastMonthCompletionHandler
         self.didTapNextMonthCompletionHandler = didTapNextMonthCompletionHandler
         super.init(frame: .zero)
-        
-        nextMonthButton.addTarget(self,
-                                  action: #selector(didTapNextMonthButton),
-                                  for: .touchUpInside)
-        
-        previousMonthButton.addTarget(self,
-                                  action: #selector(didTapPreviousMonthButton),
-                                  for: .touchUpInside)
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        backgroundColor = .systemGroupedBackground
-        
-        layer.maskedCorners = [
-            .layerMinXMinYCorner,
-            .layerMaxXMinYCorner
-        ]
-        
-        addSubviews(monthLabel,
-                    dayOfWeekStackView,
-                    separatorView,
-                    nextMonthButton,
-                    previousMonthButton)
-        
-        
-        for dayNumber in 1...7 {
-            let dayLabel = UILabel()
-            dayLabel.textAlignment = .center
-            dayLabel.font = .systemFont(ofSize: 16, weight: .bold)
-            let labelAsset = dayOfWeekLetter(for: dayNumber)
-            dayLabel.text = labelAsset.title
-            dayLabel.textColor = labelAsset.color
-            dayOfWeekStackView.addArrangedSubview(dayLabel)
-        }
+        setupUI()
+        configureButtonsSelectors()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func dayOfWeekLetter(for dayNumber: Int) -> (title: String, color: UIColor) {
-        var letter = ""
-        var color = UIColor.black
-        switch dayNumber {
-        case 1:
-            letter = "Sun"
-            color = .red
-        case 2:
-            letter = "Mon"
-        case 3:
-            letter = "Tue"
-        case 4:
-            letter = "Wed"
-        case 5:
-            letter = "Thu"
-        case 6:
-            letter = "Fri"
-        case 7:
-            letter = "Sat"
-            color = .blue
-        default:
-            letter = ""
-        }
-        return (letter, color)
+    private func dayOfWeekLetter(for dayNumber: DayOfTheWeek) -> (title: String, color: UIColor) {
+        return dayNumber.rawvalue
     }
     
     override func layoutSubviews() {
@@ -173,5 +137,59 @@ class CalendarHeaderView: UIView {
                                                      constant: 16),
             previousMonthButton.centerYAnchor.constraint(equalTo: monthLabel.centerYAnchor)
         ].forEach{ $0.isActive = true }
+    }
+}
+
+// MARK: - Setup UI
+private extension CalendarHeaderView {
+    func setupUI() {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        backgroundColor = .systemGroupedBackground
+        
+        layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMaxXMinYCorner
+        ]
+        
+        addSubviews(monthLabel,
+                    dayOfWeekStackView,
+                    separatorView,
+                    nextMonthButton,
+                    previousMonthButton)
+        
+        
+        for dayOfWeek in DayOfTheWeek.allCases {
+            let dayLabel = UILabel()
+            dayLabel.textAlignment = .center
+            dayLabel.font = .systemFont(ofSize: 16, weight: .bold)
+            let labelAsset = dayOfWeekLetter(for: dayOfWeek)
+            dayLabel.text = labelAsset.title
+            dayLabel.textColor = labelAsset.color
+            dayOfWeekStackView.addArrangedSubview(dayLabel)
+        }
+    }
+}
+
+// MARK: - Selectors
+private extension CalendarHeaderView {
+    func configureButtonsSelectors() {
+        
+        nextMonthButton.addTarget(self,
+                                  action: #selector(didTapNextMonthButton),
+                                  for: .touchUpInside)
+        
+        previousMonthButton.addTarget(self,
+                                  action: #selector(didTapPreviousMonthButton),
+                                  for: .touchUpInside)
+        
+    }
+    
+    @objc func didTapPreviousMonthButton() {
+        didTapLastMonthCompletionHandler()
+    }
+    
+    @objc func didTapNextMonthButton() {
+        didTapNextMonthCompletionHandler()
     }
 }
